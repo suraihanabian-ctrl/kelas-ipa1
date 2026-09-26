@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XII IPA 1 — Kami Selalu Bersama</title>
+  <meta name="description" content="Website resmi kelas XII IPA 1. Dokumentasi foto, profil anggota, dan informasi kelas." />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="beranda">
+
+  <header>
+    <div class="container nav">
+      <a class="brand" href="index.html">
+        <span class="brand-logo">🧑‍🤝‍🧑</span>
+        <span>XII IPA 1</span>
+      </a>
+      <button class="nav-toggle" aria-label="Menu">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html" data-page="beranda">Beranda</a></li>
+        <li><a href="anggota.html" data-page="anggota">Anggota</a></li>
+        <li><a href="galeri.html" data-page="galeri">Galeri Foto</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <span class="hero-badge">🎓 Tahun Ajaran <span id="tahunAjaran"></span></span>
+        <h1 id="judulHero"></h1>
+        <p id="deskripsiHero"></p>
+        <div class="btn-group">
+          <a class="btn btn-light" href="anggota.html">Lihat Anggota</a>
+          <a class="btn btn-ghost" href="galeri.html">Jelajahi Galeri</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Statistik -->
+    <section class="container stats">
+      <div class="stat"><div class="num" id="statAnggota">0</div><div class="label">Anggota Kelas</div></div>
+      <div class="stat"><div class="num" id="statFoto">0</div><div class="label">Foto Tersimpan</div></div>
+      <div class="stat"><div class="num" id="statTahun">0</div><div class="label">Tahun Bersama</div></div>
+      <div class="stat"><div class="num" id="statKegiatan">12</div><div class="label">Kegiatan</div></div>
+    </section>
+
+    <!-- Tentang -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Tentang Kelas</span>
+          <h2>Satu Keluarga, Banyak Cerita</h2>
+          <p id="deskripsiTentang"></p>
+        </div>
+        <div class="about-box">
+          <div class="about-item">
+            <div class="icon">📸</div>
+            <h3>Dokumentasi Lengkap</h3>
+            <p>Setiap momen penting kami abadikan, dari upacara bendera sampai class meeting.</p>
+          </div>
+          <div class="about-item">
+            <div class="icon">👥</div>
+            <h3>Profil Anggota</h3>
+            <p>Kenali satu per satu teman sekelas kami lengkap dengan peran dan hobinya.</p>
+          </div>
+          <div class="about-item">
+            <div class="icon">🗓️</div>
+            <h3>Informasi Terpusat</h3>
+            <p>Semua pengumuman dan info kelas tersedia di satu tempat, mudah diakses kapan saja.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Panggilan aksi -->
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <div class="cta">
+          <h2>Penasaran dengan cerita kami?</h2>
+          <p>Jelajahi profil anggota dan galeri foto kelas kami.</p>
+          <div class="btn-group">
+            <a class="btn btn-light" href="anggota.html">Anggota Kelas</a>
+            <a class="btn btn-ghost" href="galeri.html">Galeri Foto</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 <strong>XII IPA 1</strong> · Wali Kelas: <span id="waliKelas"></span></p>
+      <p class="credit">Dibuat dengan ❤️ oleh anggota kelas.</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script>
+    function renderBeranda() {
+      const pk = getPengaturan();
+      document.getElementById("judulHero").textContent =
+        KELAS.namaLengkap + (pk.nama && pk.nama !== KELAS.nama ? " — " + pk.nama : "");
+      document.getElementById("deskripsiHero").textContent = pk.tagline || KELAS.tagline;
+      document.getElementById("deskripsiTentang").textContent = KELAS.deskripsi;
+      document.getElementById("tahunAjaran").textContent = KELAS.tahunAjaran;
+      document.getElementById("waliKelas").textContent = pk.wali || KELAS.wali;
+      document.getElementById("statAnggota").textContent = getAnggota().length;
+      document.getElementById("statFoto").textContent = getFoto().length;
+      document.getElementById("statTahun").textContent = new Date().getFullYear() - 2019;
+    }
+    document.addEventListener("kelas-data-ready", renderBeranda);
+  </script>
+</body>
+</html>

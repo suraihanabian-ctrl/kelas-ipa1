@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anggota — XII IPA 1</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="anggota">
+
+  <header>
+    <div class="container nav">
+      <a class="brand" href="index.html">
+        <span class="brand-logo">🧑‍🤝‍🧑</span>
+        <span>XII IPA 1</span>
+      </a>
+      <button class="nav-toggle" aria-label="Menu">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html" data-page="beranda">Beranda</a></li>
+        <li><a href="anggota.html" data-page="anggota">Anggota</a></li>
+        <li><a href="galeri.html" data-page="galeri">Galeri Foto</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Family</span>
+          <h2>Anggota Kelas</h2>
+          <p>Inilah teman-teman hebat yang membuat kelas kami istimewa.</p>
+        </div>
+        <div class="grid" id="anggotaGrid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 <strong>XII IPA 1</strong> · Kami Selalu Bersama</p>
+    </div>
+  </footer>
+
+  <!-- Lightbox foto profil -->
+  <div class="lightbox" id="lightbox">
+    <button class="close" id="lbClose">×</button>
+    <img id="lbImg" alt="Perbesar foto" />
+  </div>
+
+  <script src="js/script.js"></script>
+  <script>
+    function renderAnggota() {
+      const daftar = getAnggota();
+      const grid = document.getElementById("anggotaGrid");
+      grid.innerHTML = "";
+
+      if (!daftar || daftar.length === 0) {
+        grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1">Belum ada data anggota.</div>';
+        return;
+      }
+
+      daftar.forEach((a) => {
+        const div = document.createElement("div");
+        div.className = "card member-card";
+
+        const fotoAtauHuruf = a.foto
+          ? `<img class="avatar" src="${a.foto}" alt="${a.nama}" />`
+          : `<div class="avatar">${inisial(a.nama)}</div>`;
+
+        div.innerHTML = `
+          ${fotoAtauHuruf}
+          <h3>${a.nama}</h3>
+          <div class="role">${a.jabatan}</div>
+          <div class="desc">${a.hobi ? "Hobi: " + a.hobi : ""}</div>
+        `;
+
+        if (a.foto) {
+          const img = div.querySelector("img.avatar");
+          img.addEventListener("click", () => {
+            document.getElementById("lbImg").src = a.foto;
+            document.getElementById("lightbox").classList.add("open");
+          });
+        }
+
+        grid.appendChild(div);
+      });
+    }
+
+    document.getElementById("lbClose").addEventListener("click", () =>
+      document.getElementById("lightbox").classList.remove("open")
+    );
+    document.getElementById("lightbox").addEventListener("click", (e) => {
+      if (e.target === e.currentTarget) e.currentTarget.classList.remove("open");
+    });
+
+    document.addEventListener("kelas-data-ready", renderAnggota);
+  </script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel Admin — XII IPA 1</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="galeri">
+
+  <header>
+    <div class="container nav">
+      <a class="brand" href="index.html">
+        <span class="brand-logo">🔐</span>
+        <span>Panel Admin</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">← Kembali ke Beranda</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+
+      <!-- Form Login -->
+      <div class="login-box" id="loginBox">
+        <h2>Masuk Admin</h2>
+        <p style="color:var(--muted);font-size:.9rem;text-align:center;margin-bottom:1.2rem">
+          Area ini khusus pengelola kelas.
+        </p>
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" autocomplete="username" required />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" autocomplete="current-password" required />
+          </div>
+          <button class="btn btn-primary" style="width:100%" type="submit">Masuk</button>
+          <div class="error-msg" id="loginError">Username atau password salah.</div>
+        </form>
+      </div>
+
+      <!-- Panel (muncul setelah login) -->
+      <div class="admin-box hidden" id="panelBox">
+        <div class="admin-header">
+          <div>
+            <h2 style="font-size:1.5rem">Kelola Konten Kelas</h2>
+            <p style="color:var(--muted);font-size:.9rem">Perubahan otomatis tersimpan &amp; langsung tampil di website.</p>
+          </div>
+          <button class="btn btn-danger" id="logoutBtn">Keluar</button>
+        </div>
+
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="anggota">Anggota</button>
+          <button class="tab-btn" data-tab="foto">Galeri Foto</button>
+          <button class="tab-btn" data-tab="pengaturan">Pengaturan</button>
+        </div>
+
+        <!-- KONTEN: Anggota -->
+        <div class="tab-panel" id="panel-anggota">
+          <button class="btn btn-primary" id="btnTambahAnggota">+ Tambah Anggota</button>
+          <div class="mt-2" id="anggotaList"></div>
+        </div>
+
+        <!-- KONTEN: Foto -->
+        <div class="tab-panel hidden" id="panel-foto">
+          <button class="btn btn-primary" id="btnTambahFoto">+ Tambah Foto</button>
+          <div class="mt-2" id="fotoList"></div>
+        </div>
+
+        <!-- KONTEN: Pengaturan -->
+        <div class="tab-panel hidden" id="panel-pengaturan">
+          <h3>Informasi Kelas</h3>
+          <form id="pengaturanForm">
+            <div class="form-group">
+              <label for="cfgNama">Nama Kelas</label>
+              <input type="text" id="cfgNama" />
+            </div>
+            <div class="form-group">
+              <label for="cfgWali">Wali Kelas</label>
+              <input type="text" id="cfgWali" />
+            </div>
+            <div class="form-group">
+              <label for="cfgTagline">Tagline</label>
+              <input type="text" id="cfgTagline" />
+            </div>
+            <button class="btn btn-primary" type="submit">Simpan Pengaturan</button>
+          </form>
+
+          <hr class="divider" />
+
+          <h3>Keamanan</h3>
+          <p style="color:var(--muted);font-size:.9rem;margin-bottom:1rem">
+            Ganti kredensial login (username admin).
+          </p>
+          <form id="keamananForm">
+            <div class="form-group">
+              <label for="newUser">Username Baru</label>
+              <input type="text" id="newUser" />
+            </div>
+            <div class="form-group">
+              <label for="newPass">Password Baru</label>
+              <input type="password" id="newPass" autocomplete="new-password" />
+            </div>
+            <button class="btn btn-primary" type="submit">Simpan Kredensial</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="js/script.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
