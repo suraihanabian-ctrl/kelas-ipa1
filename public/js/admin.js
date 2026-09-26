@@ -1,7 +1,7 @@
 /* Panel admin — statis & tersembunyi, data dikelola lewat API backend */
 
 const $ = (sel) => document.querySelector(sel);
-const API = "/api";
+const API = API_BASE + "/api";
 
 let token = sessionStorage.getItem("kelas_token") || null;
 

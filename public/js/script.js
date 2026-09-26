@@ -1,3 +1,6 @@
+/* ===== URL backend (Cloudflare Worker) ===== */
+const API_BASE = "https://kelas-api.suraihanabian.workers.dev";
+
 /* ===== Konfigurasi kelas (fallback lokal) ===== */
 const KELAS = {
   nama: "XII IPA 1",
@@ -47,7 +50,7 @@ let DATA = {
 
 async function loadPublicData() {
   try {
-    const res = await fetch("/api/data");
+    const res = await fetch(API_BASE + "/api/data");
     if (res.ok) {
       const d = await res.json();
       DATA = {
